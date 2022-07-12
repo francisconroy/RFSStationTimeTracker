@@ -8,8 +8,8 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = 'YVt05Wy1beb5UrsWdKHm4qM9bBOCKvhBmIss8BA'
-SAMPLE_RANGE_NAME = 'Class Data!A2:E'
+SAMPLE_SPREADSHEET_ID = '1Jfo-YVt05Wy1beb5UrsWdKHm4qM9bBOCKvhBmIss8BA'
+SAMPLE_RANGE_NAME = 'persons!A2:B'
 
 service = None
 
@@ -36,13 +36,4 @@ def get_employee_list():
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                 range=SAMPLE_RANGE_NAME).execute()
-    values = result.get('values', [])
-
-    if not values:
-        print('No data found.')
-        return
-
-    print('Name, Major:')
-    for row in values:
-        # Print columns A and E, which correspond to indices 0 and 4.
-        print('%s, %s' % (row[0], row[4]))
+    return result.get('values', [])

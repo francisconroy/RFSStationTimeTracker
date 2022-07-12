@@ -17,10 +17,12 @@ def start_page():
 
 @app.route("/checkin")
 def checkin():
-    spreadsheet.get_employee_list()
+    spreadsheet.setup_service()
+    rows = spreadsheet.get_employee_list()
+    return(f"{pprint.pformat(rows)}")
 
 
-    return render_template("checkin.html")
+    # return render_template("checkin.html")
 
 @app.post("/checkedin")
 def checkedin():
@@ -48,5 +50,4 @@ def login():
 @app.route("/handle_login")
 def handle_login():
     accept_token(request.args["code"])
-    spreadsheet.setup_service()
     return f"<p>Logged in!</p>"
