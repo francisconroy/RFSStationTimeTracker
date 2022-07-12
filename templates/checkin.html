@@ -8,17 +8,15 @@
 </head>
 <body>
     <form method="post" action="/checkedin">
-        <select name="persons" id="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-        </select><br>
-        <input name="text" type="text" id="test-text">
-        <label for="date">Birthday (date):</label>
-        <input name="date" type="date" id="date"/>
-        <label for="time">Birthday (time):</label>
-        <input name="time" type="time" id="time"/>
+        <select name="person-id" id="cars">
+            {% for person in people -%}
+            <option value="{{person[0]}}">{{person[1]}}</option>
+            {% endfor %}
+        </select><br/>
+        <label for="date">Check-in date:</label><br/>
+        <input name="date" type="date" id="date"/><br/>
+        <label for="time">Check-in time:</label><br/>
+        <input name="time" type="time" id="time"/><br/>
         <button type="submit">Submit</button>
     </form>
 </body>
